@@ -6,13 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4155C2142E1AD3E1005540F4 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4155C2132E1AD3E1005540F4 /* IOSurface.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		4155C1F82E1AD08F005540F4 /* GeminiVisionSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeminiVisionSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4155C2132E1AD3E1005540F4 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4155C20B2E1AD0A2005540F4 /* Exceptions for "GeminiVisionSwift" folder in "GeminiVisionSwift" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4155C1F72E1AD08F005540F4 /* GeminiVisionSwift */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4155C1FA2E1AD08F005540F4 /* GeminiVisionSwift */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4155C20B2E1AD0A2005540F4 /* Exceptions for "GeminiVisionSwift" folder in "GeminiVisionSwift" target */,
+			);
 			path = GeminiVisionSwift;
 			sourceTree = "<group>";
 		};
@@ -23,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4155C2142E1AD3E1005540F4 /* IOSurface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				4155C1FA2E1AD08F005540F4 /* GeminiVisionSwift */,
+				4155C2122E1AD3E1005540F4 /* Frameworks */,
 				4155C1F92E1AD08F005540F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +63,14 @@
 				4155C1F82E1AD08F005540F4 /* GeminiVisionSwift.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4155C2122E1AD3E1005540F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4155C2132E1AD3E1005540F4 /* IOSurface.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +283,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"GeminiVisionSwift/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GeminiVisionSwift/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -280,6 +309,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"GeminiVisionSwift/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GeminiVisionSwift/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

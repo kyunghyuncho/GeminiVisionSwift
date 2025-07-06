@@ -1,0 +1,77 @@
+# Created by https://www.toptal.com/developers/gitignore/api/swift,xcode
+# Edit at https://www.toptal.com/developers/gitignore?templates=swift,xcode
+
+### Swift ###
+# Standard Swift project files
+.build/
+Packages/
+*.xcodeproj
+xcuserdata/
+*.db
+
+# Package manager files
+/Packages
+/.swiftpm
+
+# Carthage
+/Carthage
+
+# Cocoapods
+/Pods
+
+# fastlane
+/fastlane/report.xml
+/fastlane/Preview.html
+/fastlane/screenshots
+/fastlane/test_output
+
+# Virtualization
+.vagrant/
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+### Xcode ###
+# Xcode
+#
+# gitignore contributors: remember to keep this file compatible with Xcode 4.
+#
+# Omit custom project settings like scheme choice and breakpoints
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcshareddata/
+*.xcworkspace/xcuserdata/
+*.xcschemes/
+xcuserdata/
+
+# Omit settings that should not be shared in a team environment.
+# E.g. Developer identity and certs
+*.xconfig
+*build.xconfig
+*dev.xconfig
+*development.xconfig
+
+# Omit application data, derived data, and temporary build products
+build/
+DerivedData/
+*~.nib/
+*~.xib/
+*~.bundle/
+*.app/
+*.ipa/
+*.lproj/
+*.storyboardc/
+*.xcarchive/
+*.[ao]/
+*.dia/
+*.tlog/
+*.d/
+
+# Omit other files
+.DS_Store
+*.swp
+profile
+
+# End of https://www.toptal.com/developers/gitignore/api/swift,xcode
+
