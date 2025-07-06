@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var analysisResult: String = ""
     @State private var isLoading = false
     @State private var errorMessage: String?
+    @State private var isShowingCropper = false
     
     // Add state for font size adjustment
     @State private var fontSizeAdjustment: CGFloat = 0
@@ -53,7 +54,9 @@ struct ContentView: View {
             // MARK: - Prompt Editor
             if capturedImage != nil {
                 VStack(alignment: .leading) {
-                    Text("Prompt").font(.subheadline).foregroundColor(.secondary)
+                    Text("Prompt")
+                        .font(.system(size: 12 + fontSizeAdjustment))
+                        .foregroundColor(.secondary)
                     TextEditor(text: $prompt)
                         .font(.system(size: 13 + fontSizeAdjustment))
                         .frame(height: 80)
@@ -77,7 +80,7 @@ struct ContentView: View {
             } else if !analysisResult.isEmpty {
                 ScrollView {
                     Text(.init(analysisResult))
-                        .font(.system(size: 13 + fontSizeAdjustment)) // Apply font size
+                        .font(.system(size: 13 + fontSizeAdjustment))
                         .textSelection(.enabled)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -87,7 +90,7 @@ struct ContentView: View {
             } else if let errorMessage = errorMessage {
                 Text(errorMessage)
                     .foregroundColor(.red)
-                    .font(.system(size: 12 + fontSizeAdjustment)) // Apply font size
+                    .font(.system(size: 12 + fontSizeAdjustment))
             }
             
             // MARK: - Action Buttons
@@ -97,6 +100,14 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .keyboardShortcut("s", modifiers: [.command, .shift])
+
+                // New "Crop" button, visible only when there's an image
+                if capturedImage != nil {
+                    Button(action: { isShowingCropper = true }) {
+                        Label("Crop", systemImage: "crop")
+                            .frame(maxWidth: .infinity)
+                    }
+                }
 
                 Button(action: handleAnalysis) {
                     Label("Analyze", systemImage: "sparkles")
@@ -110,7 +121,7 @@ struct ContentView: View {
             Divider()
             VStack(alignment: .leading, spacing: 5) {
                 Label("Gemini API Key", systemImage: "key.fill")
-                    .font(.system(size: 12 + fontSizeAdjustment)) // Apply font size
+                    .font(.system(size: 12 + fontSizeAdjustment))
                 SecureField("Enter your API key", text: $apiKey)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .focused($focusedField, equals: .apiKey)
@@ -123,25 +134,31 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .captureScreen)) { _ in
             handleCapture()
         }
-        // Add listeners for the font size notifications
         .onReceive(NotificationCenter.default.publisher(for: .increaseFontSize)) { _ in
             fontSizeAdjustment += 1
         }
         .onReceive(NotificationCenter.default.publisher(for: .decreaseFontSize)) { _ in
             fontSizeAdjustment -= 1
         }
+        // This sheet now presents the CroppingView when the "Crop" button is clicked
+        .sheet(isPresented: $isShowingCropper) {
+            if let imageToCrop = capturedImage {
+                CroppingView(image: imageToCrop, croppedImage: $capturedImage)
+                    // Add this frame modifier to make the sheet larger
+                    .frame(minWidth: 1000, minHeight: 600)
+            }
+        }
     }
 
-    // All functions below this line do not need any changes.
-    // ... handleCapture(), handleAnalysis(), etc. ...
+    // This function is now simpler
     func handleCapture() {
         Task {
             isLoading = true
             analysisResult = ""
             errorMessage = nil
-            capturedImage = nil
             
             do {
+                // Captures the full screen and displays it directly
                 capturedImage = try await capturer.captureScreen()
                 focusedField = .prompt
             } catch {
@@ -150,7 +167,8 @@ struct ContentView: View {
             isLoading = false
         }
     }
-
+    
+    // ... all other functions (handleAnalysis, saveApiKey, etc.) remain the same ...
     func handleAnalysis() {
         guard let image = capturedImage else { return }
         Task {
