@@ -51,13 +51,11 @@ struct ContentView: View {
             }
             
             // MARK: - Prompt Editor
-            if capturedImage != nil && analysisResult.isEmpty && !isLoading {
+            if capturedImage != nil {
                 VStack(alignment: .leading) {
-                    Text("Prompt")
-                        .font(.system(size: 12 + fontSizeAdjustment))
-                        .foregroundColor(.secondary)
+                    Text("Prompt").font(.subheadline).foregroundColor(.secondary)
                     TextEditor(text: $prompt)
-                        .font(.system(size: 13 + fontSizeAdjustment)) // Apply font size
+                        .font(.system(size: 13 + fontSizeAdjustment))
                         .frame(height: 80)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.3), lineWidth: 1))
